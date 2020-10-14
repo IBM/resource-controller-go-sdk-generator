@@ -1,0 +1,6 @@
+{
+  "gitHost": "github.com",
+  "gitUserId": "IBM",
+  "gitRepoId": "resource-controller-go-sdk-generator",
+  "useRuntimeException": true
+}
