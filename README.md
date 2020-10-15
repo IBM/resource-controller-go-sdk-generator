@@ -4,7 +4,7 @@ Code Generation Project to Create the Golang SDK for the "IBM Cloud Resource Con
 ## Usage
 To download (from command-line):
 ```
-go get github.com/IBM/resource-controller-go-sdk-generator v1.0.0
+go get github.com/IBM/resource-controller-go-sdk-generator v1.0.1
 ```
 
 Then import the generated client:
