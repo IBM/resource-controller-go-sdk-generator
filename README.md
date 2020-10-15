@@ -9,7 +9,7 @@ go get github.com/IBM/resource-controller-go-sdk-generator v1.0.0
 
 Then import the generated client:
 ```
-eventstreams "github.com/IBM/resource-controller-go-sdk-generator/build/generated"
+controller "github.com/IBM/resource-controller-go-sdk-generator/build/generated"
 ```
 See the generated [documentation](build/generated/README.md) for details about the client.
 
