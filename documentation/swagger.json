@@ -1,0 +1,2950 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "description": "Resource Instances",
+      "name": "Resource Instances"
+    },
+    {
+      "description": "Resource Keys",
+      "name": "Resource Keys"
+    },
+    {
+      "description": "Resource Bindings",
+      "name": "Resource Bindings"
+    },
+    {
+      "description": "Resource Aliases",
+      "name": "Resource Aliases"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://resource-controller.cloud.ibm.com/v2",
+      "description": "Production"
+    }
+  ],
+  "info": {
+    "description": "Manage lifecycle of your Cloud resources using Resource Controller APIs. Resources are provisioned globally in an account scope. Supports asynchronous provisioning of resources. Enables consumption of a global resource through a Cloud Foundry space in any region.",
+    "version": "2.0",
+    "title": "IBM Cloud Resource Controller API",
+    "x-alternate-name": "resource_controller",
+    "contact": {
+      "name": "IBM"
+    }
+  },
+  "security": [
+    {
+      "IAM": []
+    }
+  ],
+  "paths": {
+    "/resource_aliases": {
+      "get": {
+        "tags": [
+          "Resource Aliases"
+        ],
+        "summary": "Get a list of all resource aliases",
+        "description": "Get a list of all resource aliases.",
+        "operationId": "list_resource_aliases",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guid",
+            "in": "query",
+            "description": "Short ID of the alias.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The human-readable name of the alias.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_instance_id",
+            "in": "query",
+            "description": "Resource instance short ID.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region_instance_id",
+            "in": "query",
+            "description": "Short ID of the instance in a specific targeted environment. For example, `service_instance_id` in a given IBM Cloud environment.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_id",
+            "in": "query",
+            "description": "The unique ID of the offering (service name). This value is provided by and stored in the global catalog.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_group_id",
+            "in": "query",
+            "description": "Short ID of Resource group.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit on how many items should be returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://resource-controller.cloud.ibm.com/v2/resource_aliases \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The list of aliases was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceAliasesList"
+                },
+                "example": {
+                  "rows_count": 1,
+                  "next_url": "/v2/resource_aliases?next_docid=g2wAAAABaANkACNkYmNvcmVAZGIyMy5pYm0tYnNzMDAxLmNsb3VkYW50Lm5ldGwAAAACbgQAAAAA4G4EAP____9qbAAAAAJGQnZ4Bfh4oABiAAARN2pq&limit=1&account_id=d86af7367f70fba4f306d3c19c7344b2",
+                  "resources": [
+                    {
+                      "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                      "guid": "267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                      "url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                      "created_at": "2018-04-19T00:21:02.735586861Z",
+                      "updated_at": "2018-04-26T18:05:58.851303427Z",
+                      "deleted_at": null,
+                      "name": "my-instance-alias-1",
+                      "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                      "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:o/e242c7f0-9eb7-4541-ad3e-b5f5a45a1498::cf-space:f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e",
+                      "account_id": "4329073d16d2f3663f74bfa955259139",
+                      "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                      "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                      "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                      "region_instance_id": "3ea43c9c-c987-481e-9fff-283dcec927a3",
+                      "region_instance_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e:3ea43c9c-c987-481e-9fff-283dcec927a3:cf-service-instance:",
+                      "state": "active",
+                      "migrated": false,
+                      "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                      "resource_bindings_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_bindings",
+                      "resource_keys_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_keys"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Resource Aliases"
+        ],
+        "summary": "Create a new resource alias",
+        "description": "Alias a resource instance into a targeted environment's (name)space.",
+        "operationId": "create_resource_alias",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceAliasPost"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://resource-controller.cloud.ibm.com/v2/resource_aliases \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\\n  -H 'Content-Type: application/json' \\\n    -d '{\n    \"name\": \"my-instance-alias-1\",\n    \"source\": \"8d7af921-b136-4078-9666-081bd8470d94\",\n    \"target\": \"crn:v1:bluemix:public:bluemix:eu-gb:o/e242c7f0-9eb7-4541-ad3e-b5f5a45a1498::cf-space:f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e\"\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Alias has been created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceAlias"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "guid": "267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "created_at": "2018-04-19T00:21:02.735586861Z",
+                  "updated_at": "2018-04-26T18:05:58.851303427Z",
+                  "deleted_at": null,
+                  "name": "my-instance-alias-1",
+                  "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:o/e242c7f0-9eb7-4541-ad3e-b5f5a45a1498::cf-space:f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "region_instance_id": "3ea43c9c-c987-481e-9fff-283dcec927a3",
+                  "region_instance_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e:3ea43c9c-c987-481e-9fff-283dcec927a3:cf-service-instance:",
+                  "state": "active",
+                  "migrated": false,
+                  "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "resource_bindings_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_bindings",
+                  "resource_keys_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_keys"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/resource_aliases/{id}": {
+      "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header",
+          "required": true,
+          "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "description": "The short or long ID of the alias.",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Resource Aliases"
+        ],
+        "summary": "Get a resource alias",
+        "description": "Retrieve a resource alias by ID.",
+        "operationId": "get_resource_alias",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://resource-controller.cloud.ibm.com/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4 \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The alias was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceAlias"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "guid": "267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "created_at": "2018-04-19T00:21:02.735586861Z",
+                  "updated_at": "2018-04-26T18:05:58.851303427Z",
+                  "deleted_at": null,
+                  "name": "my-instance-alias-1",
+                  "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:o/e242c7f0-9eb7-4541-ad3e-b5f5a45a1498::cf-space:f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "region_instance_id": "3ea43c9c-c987-481e-9fff-283dcec927a3",
+                  "region_instance_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e:3ea43c9c-c987-481e-9fff-283dcec927a3:cf-service-instance:",
+                  "state": "active",
+                  "migrated": false,
+                  "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "resource_bindings_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_bindings",
+                  "resource_keys_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_keys"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resource Aliases"
+        ],
+        "summary": "Delete a resource alias",
+        "description": "Delete a resource alias by ID.",
+        "operationId": "delete_resource_alias",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X DELETE \\\n  https://resource-controller.cloud.ibm.com/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4 \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully deleted alias."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "410": {
+            "$ref": "#/components/responses/Gone"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Resource Aliases"
+        ],
+        "summary": "Update a resource alias",
+        "description": "Update a resource alias by ID.",
+        "operationId": "update_resource_alias",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceAliasPatch"
+              }
+            }
+          }
+        },
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X PATCH \\\n  https://resource-controller.cloud.ibm.com/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4 \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\\n  -H 'Content-Type: application/json' \\\n    -d '{\n    \"name\": \"my-instance-new-alias-1\"\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated alias.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceAlias"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "guid": "267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "created_at": "2018-04-19T00:21:02.735586861Z",
+                  "updated_at": "2018-04-26T18:05:58.851303427Z",
+                  "deleted_at": null,
+                  "name": "my-instance-new-alias-1",
+                  "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:o/e242c7f0-9eb7-4541-ad3e-b5f5a45a1498::cf-space:f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "region_instance_id": "3ea43c9c-c987-481e-9fff-283dcec927a3",
+                  "region_instance_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e:3ea43c9c-c987-481e-9fff-283dcec927a3:cf-service-instance:",
+                  "state": "active",
+                  "migrated": false,
+                  "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "resource_bindings_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_bindings",
+                  "resource_keys_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4/resource_keys"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/resource_bindings": {
+      "get": {
+        "tags": [
+          "Resource Bindings"
+        ],
+        "summary": "Get a list of all resource bindings",
+        "description": "Get a list of all resource bindings.",
+        "operationId": "list_resource_bindings",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guid",
+            "in": "query",
+            "description": "The short ID of the binding.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The human-readable name of the binding.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_group_id",
+            "in": "query",
+            "description": "Short ID of the resource group.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_id",
+            "in": "query",
+            "description": "The unique ID of the offering (service name). This value is provided by and stored in the global catalog.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region_binding_id",
+            "in": "query",
+            "description": "Short ID of the binding in the specific targeted environment, e.g. service_binding_id in a given IBM Cloud environment.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit on how many items should be returned",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\nhttps://resource-controller.cloud.ibm.com/v2/resource_bindings \\\n-H 'Authorization: Bearer <IAM_TOKEN>'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The list of resource bindings was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceBindingsList"
+                },
+                "example": {
+                  "rows_count": 1,
+                  "next_url": null,
+                  "resources": [
+                    {
+                      "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                      "guid": "25b88996-c117-484a-a233-0db73e9177fa",
+                      "url": "/v2/resource_bindings/25b88996-c117-484a-a233-0db73e9177fa",
+                      "created_at": "2018-09-24T15:26:06.849531355Z",
+                      "updated_at": "2018-09-24T15:26:06.849531355Z",
+                      "deleted_at": null,
+                      "source_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                      "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-application:b04ddee1-2838-449a-96d3-02a03179e991",
+                      "parameters": {
+                        "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                      },
+                      "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                      "region_binding_id": "684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                      "region_binding_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-service-binding:684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                      "account_id": "4329073d16d2f3663f74bfa955259139",
+                      "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                      "state": "active",
+                      "credentials": {
+                        "apikey": "XXX-YYY-ZZZ",
+                        "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                        "iam_apikey_description": "Auto generated apikey during resource-bind operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                        "iam_apikey_name": "auto-generated-apikey-25b88996-c117-484a-a233-0db73e9177fa",
+                        "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                        "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-512311d5-ec96-42ea-92f4-efe5b29f7a71",
+                        "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                      },
+                      "iam_compatible": true,
+                      "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                      "migrated": false,
+                      "resource_alias_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Resource Bindings"
+        ],
+        "summary": "Create a new resource binding",
+        "description": "Create a new resource binding.",
+        "operationId": "create_resource_binding",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceBindingPost"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://resource-controller.cloud.ibm.com/v2/resource_bindings \\\n  -H 'Authorization: Bearer <>' \\\n  -H 'Content-Type: application/json' \\\n    -d '{\n    \"name\": \"my-instance-binding-1\",\n    \"source\": \"8d7af921-b136-4078-9666-081bd8470d94\",\n    \"target\": \"crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-application:b04ddee1-2838-449a-96d3-02a03179e991\",\n    \"role\": \"Writer\"\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource binding has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceBinding"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                  "guid": "25b88996-c117-484a-a233-0db73e9177fa",
+                  "url": "/v2/resource_bindings/25b88996-c117-484a-a233-0db73e9177fa",
+                  "created_at": "2018-09-24T15:26:06.849531355Z",
+                  "updated_at": "2018-09-24T15:26:06.849531355Z",
+                  "deleted_at": null,
+                  "source_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-application:b04ddee1-2838-449a-96d3-02a03179e991",
+                  "parameters": {
+                    "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                  },
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                  "region_binding_id": "684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                  "region_binding_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-service-binding:684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "state": "active",
+                  "credentials": {
+                    "apikey": "XXX-YYY-ZZZ",
+                    "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                    "iam_apikey_description": "Auto generated apikey during resource-bind operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                    "iam_apikey_name": "auto-generated-apikey-25b88996-c117-484a-a233-0db73e9177fa",
+                    "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                    "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-512311d5-ec96-42ea-92f4-efe5b29f7a71",
+                    "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                  },
+                  "iam_compatible": true,
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "migrated": false,
+                  "resource_alias_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/resource_bindings/{id}": {
+      "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header",
+          "required": true,
+          "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "description": "The short or long ID of the binding.",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Resource Bindings"
+        ],
+        "summary": "Get a resource binding",
+        "description": "Retrieve a resource binding by ID.",
+        "operationId": "get_resource_binding",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\nhttps://resource-controller.cloud.ibm.com/v2/resource_bindings/25b88996-c117-484a-a233-0db73e9177fa \\\n-H 'Authorization: Bearer <IAM_TOKEN>'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The resource binding was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceBinding"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                  "guid": "25b88996-c117-484a-a233-0db73e9177fa",
+                  "url": "/v2/resource_bindings/25b88996-c117-484a-a233-0db73e9177fa",
+                  "created_at": "2018-09-24T15:26:06.849531355Z",
+                  "updated_at": "2018-09-24T15:26:06.849531355Z",
+                  "deleted_at": null,
+                  "source_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-application:b04ddee1-2838-449a-96d3-02a03179e991",
+                  "parameters": {
+                    "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                  },
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                  "region_binding_id": "684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                  "region_binding_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-service-binding:684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "state": "active",
+                  "credentials": {
+                    "apikey": "XXX-YYY-ZZZ",
+                    "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                    "iam_apikey_description": "Auto generated apikey during resource-bind operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                    "iam_apikey_name": "auto-generated-apikey-25b88996-c117-484a-a233-0db73e9177fa",
+                    "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                    "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-512311d5-ec96-42ea-92f4-efe5b29f7a71",
+                    "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                  },
+                  "iam_compatible": true,
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "migrated": false,
+                  "resource_alias_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resource Bindings"
+        ],
+        "summary": "Delete a resource binding",
+        "description": "Delete a resource binding by ID",
+        "operationId": "delete_resource_binding",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X DELETE \\\nhttps://resource-controller.cloud.ibm.com/v2/resource_bindings/25b88996-c117-484a-a233-0db73e9177fa \\\n-H 'Authorization: Bearer <IAM_TOKEN>'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully deleted binding."
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "410": {
+            "$ref": "#/components/responses/Gone"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Resource Bindings"
+        ],
+        "summary": "Update a resource binding",
+        "description": "Update a resource binding by ID.",
+        "operationId": "update_resource_binding",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceBindingPatch"
+              }
+            }
+          }
+        },
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\nhttps://resource-controller.cloud.ibm.com/v2/resource_bindings/25b88996-c117-484a-a233-0db73e9177fa \\\n-H 'Authorization: Bearer <IAM_TOKEN>'\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"name\": \"my-instance-new-binding-1\"\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated alias.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceBinding"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                  "guid": "25b88996-c117-484a-a233-0db73e9177fa",
+                  "url": "/v2/resource_bindings/25b88996-c117-484a-a233-0db73e9177fa",
+                  "created_at": "2018-09-24T15:26:06.849531355Z",
+                  "updated_at": "2018-09-24T15:26:06.849531355Z",
+                  "deleted_at": null,
+                  "source_crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-alias:267bf377-7fa2-43f6-94ec-09103a8e89d4",
+                  "target_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-application:b04ddee1-2838-449a-96d3-02a03179e991",
+                  "parameters": {
+                    "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                  },
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:eu-gb:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-binding:25b88996-c117-484a-a233-0db73e9177fa",
+                  "region_binding_id": "684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                  "region_binding_crn": "crn:v1:bluemix:public:bluemix:eu-gb:s/f5038ca8-9d28-42a1-9e57-9b9fdd66bf8e::cf-service-binding:684e7a0a-074f-4f97-ba5b-c0f57419fd84",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "state": "active",
+                  "credentials": {
+                    "apikey": "XXX-YYY-ZZZ",
+                    "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                    "iam_apikey_description": "Auto generated apikey during resource-bind operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                    "iam_apikey_name": "auto-generated-apikey-25b88996-c117-484a-a233-0db73e9177fa",
+                    "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                    "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-512311d5-ec96-42ea-92f4-efe5b29f7a71",
+                    "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                  },
+                  "iam_compatible": true,
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "migrated": false,
+                  "resource_alias_url": "/v2/resource_aliases/267bf377-7fa2-43f6-94ec-09103a8e89d4"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/resource_instances": {
+      "get": {
+        "tags": [
+          "Resource Instances"
+        ],
+        "summary": "Get a list of all resource instances",
+        "description": "Get a list of all resource instances.",
+        "operationId": "list_resource_instances",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guid",
+            "description": "When you provision a new resource in the specified location for the selected plan, a GUID (globally unique identifier) is created. This is a unique internal GUID managed by Resource controller that corresponds to the instance.",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "description": "The human-readable name of the instance.",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_group_id",
+            "in": "query",
+            "description": "Short ID of a resource group.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_id",
+            "in": "query",
+            "description": "The unique ID of the offering. This value is provided by and stored in the global catalog.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_plan_id",
+            "in": "query",
+            "description": "The unique ID of the plan associated with the offering. This value is provided by and stored in the global catalog.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type of the instance. For example, `service_instance`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sub_type",
+            "in": "query",
+            "description": "The sub-type of instance, e.g. `cfaas`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit on how many items should be returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://resource-controller.cloud.ibm.com/v2/resource_instances \\\n  -H 'Authorization: Bearer <>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The list of resource instances was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceInstancesList"
+                },
+                "example": {
+                  "rows_count": 1,
+                  "next_url": "/v2/resource_instances?next_docid=g1AAAACkeJzLYWBgYMpgTmFQSklKzi9KdUhJMtTLTMrVTSouNjAw1EvOyS9NScwr0ctLLckBqc1jAZIMC4DU____92eBxdycyiQ6O2sOMCQxMLHnZKEaZ0qEcQ8gxv2HG-fo9M_-Asg4-TVZWQCZcDI1&limit=2&account_id=d86af7367f70fba4f306d3c19c7344b2",
+                  "resources": [
+                    {
+                      "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                      "guid": "8d7af921-b136-4078-9666-081bd8470d94",
+                      "url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                      "created_at": "2018-04-19T00:18:53.302077457Z",
+                      "updated_at": "2018-04-19T00:18:53.302077457Z",
+                      "deleted_at": null,
+                      "name": "my-instance",
+                      "region_id": "global",
+                      "account_id": "4329073d16d2f3663f74bfa955259139",
+                      "resource_plan_id": "2fdf0c08-2d32-4f46-84b5-32e0c92fffd8",
+                      "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                      "resource_group_crn": "crn:v1:bluemix:public:resource-controller::a/4329073d16d2f3663f74bfa955259139::resource-group:0be5ad401ae913d8ff665d92680664ed",
+                      "target_crn": "crn:v1:bluemix:public:resource-catalog::a/9e16d1fed8aa7e1bd73e7a9d23434a5a::deployment:2fdf0c08-2d32-4f46-84b5-32e0c92fffd8%3Aglobal",
+                      "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                      "state": "active",
+                      "type": "service_instance",
+                      "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                      "dashboard_url": "/objectstorage/crn%3Av1%3Abluemix%3Apublic%3Acloud-object-storage%3Aglobal%3Aa%2F4329073d16d2f3663f74bfa955259139%3A8d7af921-b136-4078-9666-081bd8470d94%3A%3A",
+                      "last_operation": null,
+                      "resource_aliases_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_aliases",
+                      "resource_bindings_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_bindings",
+                      "resource_keys_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_keys",
+                      "plan_history": [
+                        {
+                          "resource_plan_id": "2fdf0c08-2d32-4f46-84b5-32e0c92fffd8",
+                          "start_date": "2018-04-19T00:18:53.302077457Z"
+                        }
+                      ],
+                      "migrated": false,
+                      "controlled_by": ""
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Resource Instances"
+        ],
+        "summary": "Create (provision) a new resource instance",
+        "description": "Provision a new resource in the specified location for the selected plan.",
+        "operationId": "create_resource_instance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceInstancePost"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://resource-controller.cloud.ibm.com/v2/resource_instances \\\n  -H 'Authorization: Bearer <>' \\\n  -H 'Content-Type: application/json' \\\n    -d '{\n    \"name\": \"my-instance\",\n    \"target\": \"bluemix-global\",\n    \"resource_group\": \"5g9f447903254bb58972a2f3f5a4c711\",\n    \"resource_plan_id\": \"0be5ad401ae913d8ff665d92680664ed\",\n    \"tags\": [\n      \"my-tag\"\n    ]\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The resource instance was provisioned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceInstance"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "guid": "8d7af921-b136-4078-9666-081bd8470d94",
+                  "url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "created_at": "2018-04-19T00:18:53.302077457Z",
+                  "updated_at": "2018-04-19T00:18:53.302077457Z",
+                  "deleted_at": null,
+                  "name": "my-instance",
+                  "region_id": "global",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_plan_id": "2fdf0c08-2d32-4f46-84b5-32e0c92fffd8",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "resource_group_crn": "crn:v1:bluemix:public:resource-controller::a/4329073d16d2f3663f74bfa955259139::resource-group:0be5ad401ae913d8ff665d92680664ed",
+                  "target_crn": "crn:v1:bluemix:public:resource-catalog::a/9e16d1fed8aa7e1bd73e7a9d23434a5a::deployment:2fdf0c08-2d32-4f46-84b5-32e0c92fffd8%3Aglobal",
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "state": "active",
+                  "type": "service_instance",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "dashboard_url": "/objectstorage/crn%3Av1%3Abluemix%3Apublic%3Acloud-object-storage%3Aglobal%3Aa%2F4329073d16d2f3663f74bfa955259139%3A8d7af921-b136-4078-9666-081bd8470d94%3A%3A",
+                  "last_operation": null,
+                  "resource_aliases_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_aliases",
+                  "resource_bindings_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_bindings",
+                  "resource_keys_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_keys",
+                  "plan_history": [
+                    {
+                      "resource_plan_id": "2fdf0c08-2d32-4f46-84b5-32e0c92fffd8",
+                      "start_date": "2018-04-19T00:18:53.302077457Z"
+                    }
+                  ],
+                  "migrated": false,
+                  "controlled_by": ""
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Request to provision a resource has been accepted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceInstance"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/resource_instances/{id}": {
+      "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header",
+          "required": true,
+          "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "description": "The short or long ID of the instance.",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Resource Instances"
+        ],
+        "summary": "Get a resource instance",
+        "description": "Retrieve a resource instance by ID.",
+        "operationId": "get_resource_instance",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://resource-controller.cloud.ibm.com/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94 \\\n  -H 'Authorization: Bearer <>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The resource instance was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceInstance"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "guid": "8d7af921-b136-4078-9666-081bd8470d94",
+                  "url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "created_at": "2018-04-19T00:18:53.302077457Z",
+                  "updated_at": "2018-04-19T00:18:53.302077457Z",
+                  "deleted_at": null,
+                  "name": "my-instance",
+                  "region_id": "global",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_plan_id": "2fdf0c08-2d32-4f46-84b5-32e0c92fffd8",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "resource_group_crn": "crn:v1:bluemix:public:resource-controller::a/4329073d16d2f3663f74bfa955259139::resource-group:0be5ad401ae913d8ff665d92680664ed",
+                  "target_crn": "crn:v1:bluemix:public:resource-catalog::a/9e16d1fed8aa7e1bd73e7a9d23434a5a::deployment:2fdf0c08-2d32-4f46-84b5-32e0c92fffd8%3Aglobal",
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "state": "active",
+                  "type": "service_instance",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "dashboard_url": "/objectstorage/crn%3Av1%3Abluemix%3Apublic%3Acloud-object-storage%3Aglobal%3Aa%2F4329073d16d2f3663f74bfa955259139%3A8d7af921-b136-4078-9666-081bd8470d94%3A%3A",
+                  "last_operation": null,
+                  "resource_aliases_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_aliases",
+                  "resource_bindings_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_bindings",
+                  "resource_keys_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_keys",
+                  "plan_history": [
+                    {
+                      "resource_plan_id": "2fdf0c08-2d32-4f46-84b5-32e0c92fffd8",
+                      "start_date": "2018-04-19T00:18:53.302077457Z"
+                    }
+                  ],
+                  "migrated": false,
+                  "controlled_by": ""
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resource Instances"
+        ],
+        "summary": "Delete a resource instance",
+        "description": "Delete a resource instance by ID.",
+        "operationId": "delete_resource_instance",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X DELETE \\\n  https://resource-controller.cloud.ibm.com/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94 \\\n  -H 'Authorization: Bearer <>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceInstance"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Deleted"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "410": {
+            "$ref": "#/components/responses/Gone"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Resource Instances"
+        ],
+        "summary": "Update a resource instance",
+        "description": "Update a resource instance by ID.",
+        "operationId": "update_resource_instance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceInstancePatch"
+              }
+            }
+          }
+        },
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X PATCH \\\n  https://resource-controller.cloud.ibm.com/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94 \\\n  -H 'Authorization: Bearer <>' \\\n  -H 'Content-Type: application/json' \\\n    -d '{\n    \"name\": \"my-instance-new-binding-1\",\n    \"resource_plan_id\": \"744bfc56-d12c-4866-88d5-dac9139e0e5d\"\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The requested changes have been applied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceInstance"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Request to update a resource instance has been accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceInstance"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "guid": "8d7af921-b136-4078-9666-081bd8470d94",
+                  "url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "created_at": "2018-04-19T00:18:53.302077457Z",
+                  "updated_at": "2018-04-19T00:18:53.302077457Z",
+                  "deleted_at": null,
+                  "name": "my-instance",
+                  "region_id": "global",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_plan_id": "744bfc56-d12c-4866-88d5-dac9139e0e5d",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "resource_group_crn": "crn:v1:bluemix:public:resource-controller::a/4329073d16d2f3663f74bfa955259139::resource-group:0be5ad401ae913d8ff665d92680664ed",
+                  "target_crn": "crn:v1:bluemix:public:resource-catalog::a/9e16d1fed8aa7e1bd73e7a9d23434a5a::deployment:2fdf0c08-2d32-4f46-84b5-32e0c92fffd8%3Aglobal",
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "state": "active",
+                  "type": "service_instance",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "dashboard_url": "/objectstorage/crn%3Av1%3Abluemix%3Apublic%3Acloud-object-storage%3Aglobal%3Aa%2F4329073d16d2f3663f74bfa955259139%3A8d7af921-b136-4078-9666-081bd8470d94%3A%3A",
+                  "last_operation": null,
+                  "resource_aliases_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_aliases",
+                  "resource_bindings_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_bindings",
+                  "resource_keys_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94/resource_keys",
+                  "plan_history": [
+                    {
+                      "resource_plan_id": "2fdf0c08-2d32-4f46-84b5-32e0c92fffd8",
+                      "start_date": "2018-04-19T00:18:53.302077457Z"
+                    }
+                  ],
+                  "migrated": false,
+                  "controlled_by": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/resource_keys": {
+      "get": {
+        "tags": [
+          "Resource Keys"
+        ],
+        "summary": "Get a list of resource keys",
+        "description": "List all resource keys",
+        "operationId": "list_resource_keys",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "guid",
+            "in": "query",
+            "description": "When you create a new key, a GUID (globally unique identifier) is assigned. This is a unique internal GUID managed by Resource controller that corresponds to the key.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The human-readable name of the key.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_group_id",
+            "in": "query",
+            "description": "The short ID of the resource group.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resource_id",
+            "in": "query",
+            "description": "The unique ID of the offering. This value is provided by and stored in the global catalog.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit on how many items should be returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://resource-controller.cloud.ibm.com/v2/resource_keys \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The list of resource keys was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceKeysList"
+                },
+                "example": {
+                  "rows_count": 1,
+                  "next_url": null,
+                  "resources": [
+                    {
+                      "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                      "guid": "23693f48-aaa2-4079-b0c7-334846eff8d0",
+                      "url": "/v2/resource_keys/23693f48-aaa2-4079-b0c7-334846eff8d0",
+                      "created_at": "2018-07-02T22:03:43.837979455Z",
+                      "updated_at": "2018-07-02T22:03:43.837979455Z",
+                      "deleted_at": null,
+                      "source_crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                      "name": "my-instance-key-1",
+                      "parameters": {
+                        "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                      },
+                      "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                      "state": "active",
+                      "account_id": "4329073d16d2f3663f74bfa955259139",
+                      "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                      "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                      "credentials": {
+                        "apikey": "XXXX-YYYY-ZZZZ\"",
+                        "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                        "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                        "iam_apikey_name": "auto-generated-apikey-23693f48-aaa2-4079-b0c7-334846eff8d0",
+                        "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                        "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-64c29e4f-422d-468c-a11b-1a8f671b5c89",
+                        "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                      },
+                      "iam_compatible": true,
+                      "migrated": false,
+                      "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                      "resource_alias_url": null
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Resource Keys"
+        ],
+        "summary": "Create a new resource key",
+        "description": "Create a new resource key.",
+        "operationId": "create_resource_key",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceKeyPost"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X POST \\\n  https://resource-controller.cloud.ibm.com/v2/resource_keys \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"name\": \"my-instance-key-1\",\n  \"source\": \"267bf377-7fa2-43f6-94ec-09103a8e89d4\",\n  \"role\": \"Writer\"\n}'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceKey"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "guid": "23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "url": "/v2/resource_keys/23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "created_at": "2018-07-02T22:03:43.837979455Z",
+                  "updated_at": "2018-07-02T22:03:43.837979455Z",
+                  "deleted_at": null,
+                  "source_crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "name": "my-instance-key-1",
+                  "parameters": {
+                    "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                  },
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "state": "active",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "credentials": {
+                    "apikey": "XXXX-YYYY-ZZZZ\"",
+                    "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                    "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                    "iam_apikey_name": "auto-generated-apikey-23693f48-aaa2-4079-b0c7-334846eff8d0",
+                    "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                    "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-64c29e4f-422d-468c-a11b-1a8f671b5c89",
+                    "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                  },
+                  "iam_compatible": true,
+                  "migrated": false,
+                  "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "resource_alias_url": null
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/resource_keys/{id}": {
+      "parameters": [
+        {
+          "name": "Authorization",
+          "in": "header",
+          "required": true,
+          "description": "Authorization value should use the format Bearer [token] - where [token] is an opaque access token obtained by authenticating with IAM authentication services.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "description": "The short or long ID of the key.",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Resource Keys"
+        ],
+        "summary": "Get resource key by ID",
+        "description": "Get resource key by ID.",
+        "operationId": "get_resource_key",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X GET \\\n  https://resource-controller.cloud.ibm.com/v2/resource_keys/23693f48-aaa2-4079-b0c7-334846eff8d0 \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The resource key was successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceKey"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "guid": "23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "url": "/v2/resource_keys/23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "created_at": "2018-07-02T22:03:43.837979455Z",
+                  "updated_at": "2018-07-02T22:03:43.837979455Z",
+                  "deleted_at": null,
+                  "source_crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "name": "my-instance-key-1",
+                  "parameters": {
+                    "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                  },
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "state": "active",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "credentials": {
+                    "apikey": "XXXX-YYYY-ZZZZ",
+                    "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                    "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                    "iam_apikey_name": "auto-generated-apikey-23693f48-aaa2-4079-b0c7-334846eff8d0",
+                    "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                    "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-64c29e4f-422d-468c-a11b-1a8f671b5c89",
+                    "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                  },
+                  "iam_compatible": true,
+                  "migrated": false,
+                  "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "resource_alias_url": null
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Resource Keys"
+        ],
+        "summary": "Delete a resource key by ID",
+        "description": "Delete a resource key by ID.",
+        "operationId": "delete_resource_key",
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X DELETE \\\n  https://resource-controller.cloud.ibm.com/v2/resource_keys/23693f48-aaa2-4079-b0c7-334846eff8d0 \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "410": {
+            "$ref": "#/components/responses/Gone"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Resource Keys"
+        ],
+        "summary": "Update a resource key",
+        "description": "Update a resource key by ID.",
+        "operationId": "update_resource_key",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourceKeyPatch"
+              }
+            }
+          }
+        },
+        "x-sdk-operations": {
+          "request-examples": {
+            "curl": [
+              {
+                "name": "Example request",
+                "example": [
+                  {
+                    "type": "code",
+                    "lang": "curl",
+                    "source": [
+                      "curl -X PATCH \\\n  https://resource-controller.cloud.ibm.com/v2/resource_keys/23693f48-aaa2-4079-b0c7-334846eff8d0 \\\n  -H 'Authorization: Bearer <IAM_TOKEN>' \\\n  -H 'Content-Type: application/json' \\\n    -d '{\n    \"name\": \"my-instance-new-key-1\",\n  }'"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The resource key was successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceKey"
+                },
+                "example": {
+                  "id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "guid": "23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "url": "/v2/resource_keys/23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "created_at": "2018-07-02T22:03:43.837979455Z",
+                  "updated_at": "2018-07-02T22:03:43.837979455Z",
+                  "deleted_at": null,
+                  "source_crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                  "name": "my-instance-new-key-1",
+                  "parameters": {
+                    "role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer"
+                  },
+                  "crn": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94:resource-key:23693f48-aaa2-4079-b0c7-334846eff8d0",
+                  "state": "active",
+                  "account_id": "4329073d16d2f3663f74bfa955259139",
+                  "resource_group_id": "0be5ad401ae913d8ff665d92680664ed",
+                  "resource_id": "dff97f5c-bc5e-4455-b470-411c3edbe49c",
+                  "credentials": {
+                    "apikey": "XXXX-YYYY-ZZZZ",
+                    "endpoints": "https://cos-service-armada-s.us-south.containers.mybluemix.net/endpoints",
+                    "iam_apikey_description": "Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::",
+                    "iam_apikey_name": "auto-generated-apikey-23693f48-aaa2-4079-b0c7-334846eff8d0",
+                    "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+                    "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/4329073d16d2f3663f74bfa955259139::serviceid:ServiceId-64c29e4f-422d-468c-a11b-1a8f671b5c89",
+                    "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/4329073d16d2f3663f74bfa955259139:8d7af921-b136-4078-9666-081bd8470d94::"
+                  },
+                  "iam_compatible": true,
+                  "migrated": false,
+                  "resource_instance_url": "/v2/resource_instances/8d7af921-b136-4078-9666-081bd8470d94",
+                  "resource_alias_url": null
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "IAM": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "The request could not be understood due to malformed syntax.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorReport"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Your access token is invalid or authenication of your token failed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorReport"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Your access token is valid but does not have the necessary permissions to access this resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorReport"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The resource could not be found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorReport"
+            }
+          }
+        }
+      },
+      "Gone": {
+        "description": "The resource could was previously deleted and is no longer available.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorReport"
+            }
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "description": "The request could not be processed.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorReport"
+            }
+          }
+        }
+      },
+      "TooManyRequests": {
+        "description": "Too many requests. Please wait a few minutes and try again.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorReport"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Your request could not be processed. Please try again later. If the problem persists, note the `transaction-id` in the response header and contact [IBM Cloud support](https://watson.service-now.com/wcp)."
+      }
+    },
+    "schemas": {
+      "ErrorReport": {
+        "description": "Description of an error that occurred in a service request.",
+        "properties": {
+          "error_code": {
+            "description": "The error code encountered.",
+            "type": "string",
+            "example": "RC-CloudControllerErrorResponse"
+          },
+          "message": {
+            "description": "The error message.",
+            "type": "string"
+          },
+          "status_code": {
+            "description": "The status code.",
+            "type": "integer"
+          },
+          "transaction_id": {
+            "description": "The transaction-id of the request.",
+            "type": "string"
+          }
+        }
+      },
+      "ResourceInstancePatch": {
+        "description": "Updated property values for a resource instance.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The new name of the instance. Must be 180 characters or less and cannot include any special characters other than `(space) - . _ :`.",
+            "type": "string",
+            "pattern": "^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$",
+            "example": "my-new-instance-name"
+          },
+          "parameters": {
+            "description": "The new configuration options for the instance.",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "resource_plan_id": {
+            "description": "The unique ID of the plan associated with the offering. This value is provided by and stored in the global catalog.",
+            "type": "string",
+            "example": "a8dff6d3-d287-4668-a81d-c87c55c2656d"
+          }
+        }
+      },
+      "ResourceAliasPatch": {
+        "description": "Updated property values for a resource alias.",
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "description": "The new name of the alias. Must be 180 characters or less and cannot include any special characters other than `(space) - . _ :`.",
+            "type": "string",
+            "pattern": "^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$",
+            "example": "my-new-alias-name"
+          }
+        }
+      },
+      "ResourceAliasPost": {
+        "description": "Property values for the new resource alias.",
+        "type": "object",
+        "required": [
+          "name",
+          "source",
+          "target"
+        ],
+        "properties": {
+          "name": {
+            "description": "The name of the alias. Must be 180 characters or less and cannot include any special characters other than `(space) - . _ :`.",
+            "type": "string",
+            "pattern": "^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$",
+            "example": "my-alias"
+          },
+          "source": {
+            "description": "The short or long ID of resource instance.",
+            "type": "string",
+            "example": "a8dff6d3-d287-4668-a81d-c87c55c2656d"
+          },
+          "target": {
+            "description": "The CRN of target name(space) in a specific environment, e.g. space in Dallas YP, CFEE instance etc.",
+            "type": "string",
+            "example": "crn:v1:bluemix:public:bluemix:us-south:o/5e939cd5-6377-4383-b9e0-9db22cd11753::cf-space:66c8b915-101a-406c-a784-e6636676e4f5"
+          }
+        }
+      },
+      "ResourceBindingPost": {
+        "description": "Property values for the new resource binding.",
+        "type": "object",
+        "required": [
+          "source",
+          "target"
+        ],
+        "properties": {
+          "name": {
+            "description": "The name of the binding. Must be 180 characters or less and cannot include any special characters other than `(space) - . _ :`.",
+            "type": "string",
+            "pattern": "^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$",
+            "example": "my-binding"
+          },
+          "source": {
+            "description": "The short or long ID of resource alias.",
+            "type": "string",
+            "example": "25eba2a9-beef-450b-82cf-f5ad5e36c6dd"
+          },
+          "target": {
+            "type": "string",
+            "description": "The CRN of application to bind to in a specific environment, e.g. Dallas YP, CFEE instance",
+            "example": "crn:v1:bluemix:public:bluemix:us-south:s/0ba4dba0-a120-4a1e-a124-5a249a904b76::cf-application:a1caa40b-2c24-4da8-8267-ac2c1a42ad0c"
+          },
+          "parameters": {
+            "description": "Configuration options represented as key-value pairs that are passed through to the target resource brokers.",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "role": {
+            "description": "The role name or it's CRN.",
+            "type": "string",
+            "default": "Writer",
+            "example": "Writer"
+          }
+        }
+      },
+      "ResourceBindingPatch": {
+        "description": "Updated property values for the resource binding.",
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "description": "The new name of the binding. Must be 180 characters or less and cannot include any special characters other than `(space) - . _ :`.",
+            "type": "string",
+            "pattern": "^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$",
+            "example": "my-new-binding-name"
+          }
+        }
+      },
+      "ResourceInstancePost": {
+        "description": "Property values for the new resource instance.",
+        "type": "object",
+        "required": [
+          "name",
+          "target",
+          "resource_group",
+          "resource_plan_id"
+        ],
+        "properties": {
+          "name": {
+            "description": "The name of the instance. Must be 180 characters or less and cannot include any special characters other than `(space) - . _ :`.",
+            "type": "string",
+            "pattern": "^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$",
+            "example": "my-instance"
+          },
+          "target": {
+            "description": "The deployment location where the instance should be hosted.",
+            "type": "string",
+            "example": "bluemix-us-south"
+          },
+          "resource_group": {
+            "description": "Short or long ID of resource group",
+            "type": "string",
+            "example": "5c49eabc-f5e8-5881-a37e-2d100a33b3df"
+          },
+          "resource_plan_id": {
+            "description": "The unique ID of the plan associated with the offering. This value is provided by and stored in the global catalog.",
+            "type": "string",
+            "example": "cloudant-standard"
+          },
+          "tags": {
+            "description": "Tags that are attached to the instance after provisioning. These tags can be searched and managed through the Tagging API in IBM Cloud.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Configuration options represented as key-value pairs that are passed through to the target resource brokers."
+          }
+        }
+      },
+      "ResourceKeyPatch": {
+        "description": "Updated property values for the resource key.",
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "description": "The new name of the key. Must be 180 characters or less and cannot include any special characters other than `(space) - . _ :`.",
+            "type": "string",
+            "pattern": "^([^[:ascii:]]|[a-zA-Z0-9-._: ])+$",
+            "example": "my-new-key-name"
+          }
+        }
+      },
+      "ResourceKeyPost": {
+        "description": "Property values for the new resource key.",
+        "type": "object",
+        "required": [
+          "name",
+          "source"
+        ],
+        "properties": {
+          "name": {
+            "description": "The name of the key.",
+            "type": "string",
+            "example": "my-key"
+          },
+          "source": {
+            "description": "The short or long ID of resource instance or alias.",
+            "type": "string",
+            "example": "25eba2a9-beef-450b-82cf-f5ad5e36c6dd"
+          },
+          "parameters": {
+            "description": "Configuration options represented as key-value pairs that are passed through to the target resource brokers.",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "role": {
+            "description": "The role name or it's CRN.",
+            "type": "string",
+            "default": "Writer",
+            "example": "Writer"
+          }
+        }
+      },
+      "ResourceInstance": {
+        "description": "A resource instance.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID associated with the instance.",
+            "type": "string"
+          },
+          "guid": {
+            "description": "When you create a new resource, a globally unique identifier (GUID) is assigned. This GUID is a unique internal identifier managed by the resource controller that corresponds to the instance.",
+            "type": "string"
+          },
+          "crn": {
+            "description": "The full Cloud Resource Name (CRN) associated with the instance. For more information about this format, see [Cloud Resource Names](https://cloud.ibm.com/docs/overview?topic=overview-crn).",
+            "type": "string"
+          },
+          "url": {
+            "description": "When you provision a new resource, a relative URL path is created identifying the location of the instance.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The human-readable name of the instance.",
+            "type": "string"
+          },
+          "account_id": {
+            "description": "An alpha-numeric value identifying the account ID.",
+            "type": "string"
+          },
+          "resource_group_id": {
+            "description": "The short ID of the resource group.",
+            "type": "string"
+          },
+          "resource_group_crn": {
+            "description": "The long ID (full CRN) of the resource group.",
+            "type": "string"
+          },
+          "resource_id": {
+            "description": "The unique ID of the offering. This value is provided by and stored in the global catalog.",
+            "type": "string"
+          },
+          "resource_plan_id": {
+            "description": "The unique ID of the plan associated with the offering. This value is provided by and stored in the global catalog.",
+            "type": "string"
+          },
+          "target_crn": {
+            "description": "The full deployment CRN as defined in the global catalog. The Cloud Resource Name (CRN) of the deployment location where the instance is provisioned.",
+            "type": "string"
+          },
+          "state": {
+            "description": "The current state of the instance. For example, if the instance is deleted, it will return removed.",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of the instance, e.g. `service_instance`.",
+            "type": "string"
+          },
+          "sub_type": {
+            "description": "The sub-type of instance, e.g. `cfaas`.",
+            "type": "string"
+          },
+          "last_operation": {
+            "description": "The status of the last operation requested on the instance.",
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "dashboard_url": {
+            "description": "The resource-broker-provided URL to access administrative features of the instance.",
+            "type": "string"
+          },
+          "plan_history": {
+            "description": "The plan history of the instance.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanHistoryItem"
+            }
+          },
+          "resource_aliases_url": {
+            "description": "The relative path to the resource aliases for the instance.",
+            "type": "string"
+          },
+          "resource_bindings_url": {
+            "description": "The relative path to the resource bindings for the instance.",
+            "type": "string"
+          },
+          "resource_keys_url": {
+            "description": "The relative path to the resource keys for the instance.",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date when the instance was created.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "description": "The date when the instance was last updated.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "description": "The date when the instance was deleted.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PlanHistoryItem": {
+        "description": "An element of the plan history of the instance.",
+        "type": "object",
+        "required": [
+          "resource_plan_id",
+          "start_date"
+        ],
+        "properties": {
+          "resource_plan_id": {
+            "description": "The unique ID of the plan associated with the offering. This value is provided by and stored in the global catalog.",
+            "type": "string"
+          },
+          "start_date": {
+            "description": "The date on which the plan was changed.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ResourceInstancesList": {
+        "description": "A list of resource instances.",
+        "type": "object",
+        "required": [
+          "next_url",
+          "resources",
+          "rows_count"
+        ],
+        "properties": {
+          "next_url": {
+            "description": "The URL for requesting the next page of results.",
+            "type": "string"
+          },
+          "resources": {
+            "description": "A list of resource instances.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceInstance"
+            }
+          },
+          "rows_count": {
+            "description": "The number of resource instances in `resources`.",
+            "type": "integer"
+          }
+        }
+      },
+      "ResourceAlias": {
+        "description": "A resource alias.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID associated with the alias.",
+            "type": "string"
+          },
+          "guid": {
+            "description": "When you create a new alias, a globally unique identifier (GUID) is assigned. This GUID is a unique internal indentifier managed by the resource controller that corresponds to the alias.",
+            "type": "string"
+          },
+          "crn": {
+            "description": "The full Cloud Resource Name (CRN) associated with the alias. For more information about this format, see [Cloud Resource Names](https://cloud.ibm.com/docs/overview?topic=overview-crn).",
+            "type": "string"
+          },
+          "url": {
+            "description": "When you created a new alias, a relative URL path is created identifying the location of the alias.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The human-readable name of the alias.",
+            "type": "string"
+          },
+          "account_id": {
+            "description": "An alpha-numeric value identifying the account ID.",
+            "type": "string"
+          },
+          "resource_group_id": {
+            "description": "The short ID of the resource group.",
+            "type": "string"
+          },
+          "resource_group_crn": {
+            "description": "The long ID (full CRN) of the resource group.",
+            "type": "string"
+          },
+          "target_crn": {
+            "description": "The CRN of the target namespace in the specific environment.",
+            "type": "string"
+          },
+          "state": {
+            "description": "The state of the alias.",
+            "type": "string"
+          },
+          "resource_instance_id": {
+            "description": "The short ID of the resource instance that is being aliased.",
+            "type": "string"
+          },
+          "region_instance_id": {
+            "description": "The short ID of the instance in the specific target environment, e.g. `service_instance_id` in a given IBM Cloud environment.",
+            "type": "string"
+          },
+          "resource_instance_url": {
+            "description": "The relative path to the instance.",
+            "type": "string"
+          },
+          "resource_bindings_url": {
+            "description": "The relative path to the resource bindings for the alias.",
+            "type": "string"
+          },
+          "resource_keys_url": {
+            "description": "The relative path to the resource keys for the alias.",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date when the alias was created.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "description": "The date when the alias was last updated.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "description": "The date when the alias was deleted.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ResourceAliasesList": {
+        "description": "A list of resource aliases.",
+        "type": "object",
+        "required": [
+          "next_url",
+          "resources",
+          "rows_count"
+        ],
+        "properties": {
+          "next_url": {
+            "description": "The URL for requesting the next page of results.",
+            "type": "string"
+          },
+          "resources": {
+            "description": "A list of resource aliases.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceAlias"
+            }
+          },
+          "rows_count": {
+            "description": "The number of resource aliases in `resources`.",
+            "type": "number"
+          }
+        }
+      },
+      "ResourceBinding": {
+        "description": "A resource binding.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID associated with the binding.",
+            "type": "string"
+          },
+          "guid": {
+            "description": "When you create a new binding, a globally unique identifier (GUID) is assigned. This GUID is a unique internal identifier managed by the resource controller that corresponds to the binding.",
+            "type": "string"
+          },
+          "crn": {
+            "description": "The full Cloud Resource Name (CRN) associated with the binding. For more information about this format, see [Cloud Resource Names](https://cloud.ibm.com/docs/overview?topic=overview-crn).",
+            "type": "string"
+          },
+          "url": {
+            "description": "When you provision a new binding, a relative URL path is created identifying the location of the binding.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The human-readable name of the binding.",
+            "type": "string"
+          },
+          "account_id": {
+            "description": "An alpha-numeric value identifying the account ID.",
+            "type": "string"
+          },
+          "resource_group_id": {
+            "description": "The short ID of the resource group.",
+            "type": "string"
+          },
+          "source_crn": {
+            "description": "The CRN of resource alias associated to the binding.",
+            "type": "string"
+          },
+          "target_crn": {
+            "description": "The CRN of target resource, e.g. application, in a specific environment.",
+            "type": "string"
+          },
+          "region_binding_id": {
+            "description": "The short ID of the binding in specific targeted environment, e.g. `service_binding_id` in a given IBM Cloud environment.",
+            "type": "string"
+          },
+          "state": {
+            "description": "The state of the binding.",
+            "type": "string"
+          },
+          "credentials": {
+            "description": "The credentials for the binding. Additional key-value pairs are passed through from the resource brokers.  For additional details, see the service’s documentation.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            ]
+          },
+          "iam_compatible": {
+            "description": "Specifies whether the binding’s credentials support IAM.",
+            "type": "boolean"
+          },
+          "resource_alias_url": {
+            "description": "The relative path to the resource alias that this binding is associated with.",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date when the binding was created.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "description": "The date when the binding was last updated.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "description": "The date when the binding was deleted.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ResourceBindingsList": {
+        "description": "A list of resource bindings.",
+        "type": "object",
+        "required": [
+          "next_url",
+          "resources",
+          "rows_count"
+        ],
+        "properties": {
+          "next_url": {
+            "description": "The URL for requesting the next page of results.",
+            "type": "string"
+          },
+          "resources": {
+            "description": "A list of resource bindings.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceBinding"
+            }
+          },
+          "rows_count": {
+            "description": "The number of resource bindings in `resources`.",
+            "type": "number"
+          }
+        }
+      },
+      "ResourceKey": {
+        "description": "A resource key.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID associated with the key.",
+            "type": "string"
+          },
+          "guid": {
+            "description": "When you create a new key, a globally unique identifier (GUID) is assigned. This GUID is a unique internal identifier managed by the resource controller that corresponds to the key.",
+            "type": "string"
+          },
+          "crn": {
+            "description": "The full Cloud Resource Name (CRN) associated with the key. For more information about this format, see [Cloud Resource Names](https://cloud.ibm.com/docs/overview?topic=overview-crn).",
+            "type": "string"
+          },
+          "url": {
+            "description": "When you created a new key, a relative URL path is created identifying the location of the key.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The human-readable name of the key.",
+            "type": "string"
+          },
+          "account_id": {
+            "description": "An alpha-numeric value identifying the account ID.",
+            "type": "string"
+          },
+          "resource_group_id": {
+            "description": "The short ID of the resource group.",
+            "type": "string"
+          },
+          "source_crn": {
+            "description": "The CRN of resource instance or alias associated to the key.",
+            "type": "string"
+          },
+          "state": {
+            "description": "The state of the key.",
+            "type": "string"
+          },
+          "credentials": {
+            "description": "The credentials for the key. Additional key-value pairs are passed through from the resource brokers.  Refer to service’s documentation for additional details.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            ]
+          },
+          "iam_compatible": {
+            "description": "Specifies whether the key’s credentials support IAM.",
+            "type": "boolean"
+          },
+          "resource_instance_url": {
+            "description": "The relative path to the resource.",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The date when the key was created.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "description": "The date when the key was last updated.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "description": "The date when the key was deleted.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ResourceKeysList": {
+        "description": "A list of resource keys.",
+        "type": "object",
+        "required": [
+          "next_url",
+          "resources",
+          "rows_count"
+        ],
+        "properties": {
+          "next_url": {
+            "description": "The URL for requesting the next page of results.",
+            "type": "string"
+          },
+          "resources": {
+            "description": "A list of resource keys.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceKey"
+            }
+          },
+          "rows_count": {
+            "description": "The number of resource keys in `resources`.",
+            "type": "number"
+          }
+        }
+      },
+      "Credentials": {
+        "description": "The credentials for a resource.",
+        "type": "object",
+        "properties": {
+          "apikey": {
+            "description": "The API key for the credentials.",
+            "type": "string"
+          },
+          "iam_apikey_description": {
+            "description": "The optional description of the API key.",
+            "type": "string"
+          },
+          "iam_apikey_name": {
+            "description": "The name of the API key.",
+            "type": "string"
+          },
+          "iam_role_crn": {
+            "description": "The Cloud Resource Name for the role of the credentials.",
+            "type": "string"
+          },
+          "iam_serviceid_crn": {
+            "description": "The Cloud Resource Name for the service ID of the credentials.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "description": "Additional key-value pairs from the resource broker."
+        }
+      }
+    }
+  }
+}
