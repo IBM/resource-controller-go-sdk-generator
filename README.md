@@ -25,7 +25,7 @@ See the generated [documentation](build/generated/README.md) for details about t
   - NOTE: see this Post  for how to download the "OpenAPI definition JSON document": https://stackoverflow.com/questions/57154077/where-can-i-find-the-swagger-documentation-json-doc-for-the-ibm-cloud-iam-iden
 , generic Swagger Codegen system is unable to handle these tags.  
 - In the file build.gradle, change the value of `majorMinorVersion` to reflect whatever changes were made in the Swagger definition since the last client generation (using semantic versioning).
-- When ready to "publish" the new version, simply push the newly generated code changes. Then once it's in master, tag the master branch with "v\<majorMinorVersion\>", which will allow the new version to be accessible by other go code. For example, to publish the 1.0.2 version, you'd run the following git commands:
+- When ready to "publish" the new version, simply push the newly generated code changes. Then once it's in main, tag the main branch with "v\<majorMinorVersion\>", which will allow the new version to be accessible by other go code. For example, to publish the 1.0.2 version, you'd run the following git commands:
   - git tag v1.0.2
   - git push origin v1.0.2
 
